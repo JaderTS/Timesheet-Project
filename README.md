@@ -1,0 +1,2 @@
+# TrabalhoFinal
+Trabalho Final is a Timesheet project that was development in C# (C Sharp) language with tech in dotNet and MVC. The project was developed when I was studying in course of the development that it is sponsored by Microsoft-PUCRS Innovation Center and Dell Computers, the S2BA aims to train human resources in the database areas, development of systems and network infrastructure. There are more than 300 hours / class training in the three tracks. Classes are taught by teachers and PUCRS Dell professionals and the materials used are the official Microsoft courses.
