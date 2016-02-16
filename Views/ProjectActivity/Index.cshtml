@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TrabalhoFinal.ProjectActivity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Projetos/Atividades</h2>
+
+@{
+     var grid = new WebGrid(Model,defaultSort:"Name",canPage:true,canSort:true,rowsPerPage:5);
+}
+
+@grid.GetHtml(footerStyle: "paginator",
+columns: grid.Columns(
+        grid.Column("Name", header:"Projeto/Atividade"),
+        grid.Column("UserProfile.UserName", header:"Responsável"),
+        grid.Column("ProjectType.Description", header:"Tipo"),
+        grid.Column("Editar",header: "", format:
+        @<text>@Html.ActionLink("Editar", "Edit", new { id=item.ProjectActivityID })</text>,canSort: false ),
+        grid.Column("Deletar",header: "", format:
+        @<text>@Html.ActionLink("Deletar", "Delete", new { id=item.ProjectActivityID })</text>,canSort: false )
+        )
+    )

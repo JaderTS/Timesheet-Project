@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TrabalhoFinal.Models.HoursByProject>
+
+@{
+    ViewBag.Title = "HoursByProject";
+}
+
+<h2>Horas por Projeto</h2>
+
+@{
+     var grid = new WebGrid(Model,defaultSort:"ProjectName",canPage:true,canSort:true,rowsPerPage:3);
+}
+
+@grid.GetHtml(footerStyle: "",
+columns: grid.Columns(
+        grid.Column("ProjectName", header:"Nome"),
+        grid.Column("ProjectType", header:"Tipo"),
+        grid.Column("ProjectOwner", header:"Responsável"),
+        grid.Column("TotalHour", header:"Total de horas")
+        )
+    )

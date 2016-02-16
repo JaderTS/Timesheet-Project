@@ -1,0 +1,53 @@
+﻿@model TrabalhoFinal.ProjectActivity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ProjectActivity</legend>
+
+        @Html.HiddenFor(model => model.ProjectActivityID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OwnerUserID, "UserProfile")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("OwnerUserID", String.Empty)
+            @Html.ValidationMessageFor(model => model.OwnerUserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectTypeID, "ProjectType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProjectTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProjectTypeID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

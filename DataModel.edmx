@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="ProjectActivity" EntityType="DataModel.Store.ProjectActivity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectType" EntityType="DataModel.Store.ProjectType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="DataModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProject" EntityType="DataModel.Store.UserProject" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ProjectActivity_ToTable" Association="DataModel.Store.FK_ProjectActivity_ToTable">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="ProjectActivity" EntitySet="ProjectActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectActivity_ToTable_1" Association="DataModel.Store.FK_ProjectActivity_ToTable_1">
+            <End Role="ProjectType" EntitySet="ProjectType" />
+            <End Role="ProjectActivity" EntitySet="ProjectActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_ToTable" Association="DataModel.Store.FK_UserProject_ToTable">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserProject" EntitySet="UserProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_ToTable_1" Association="DataModel.Store.FK_UserProject_ToTable_1">
+            <End Role="ProjectActivity" EntitySet="ProjectActivity" />
+            <End Role="UserProject" EntitySet="UserProject" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ProjectActivity">
+          <Key>
+            <PropertyRef Name="ProjectActivityID" />
+          </Key>
+          <Property Name="ProjectActivityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="OwnerUserID" Type="int" Nullable="false" />
+          <Property Name="ProjectTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectType">
+          <Key>
+            <PropertyRef Name="ProjectTypeID" />
+          </Key>
+          <Property Name="ProjectTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserProject">
+          <Key>
+            <PropertyRef Name="UserProjectID" />
+          </Key>
+          <Property Name="UserProjectID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectActivityID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TotalHours" Type="float" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProjectActivity_ToTable">
+          <End Role="UserProfile" Type="DataModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="ProjectActivity" Type="DataModel.Store.ProjectActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectActivity">
+              <PropertyRef Name="OwnerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectActivity_ToTable_1">
+          <End Role="ProjectType" Type="DataModel.Store.ProjectType" Multiplicity="1" />
+          <End Role="ProjectActivity" Type="DataModel.Store.ProjectActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectType">
+              <PropertyRef Name="ProjectTypeID" />
+            </Principal>
+            <Dependent Role="ProjectActivity">
+              <PropertyRef Name="ProjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_ToTable">
+          <End Role="UserProfile" Type="DataModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="UserProject" Type="DataModel.Store.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_ToTable_1">
+          <End Role="ProjectActivity" Type="DataModel.Store.ProjectActivity" Multiplicity="1" />
+          <End Role="UserProject" Type="DataModel.Store.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectActivity">
+              <PropertyRef Name="ProjectActivityID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="ProjectActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataModelContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ProjectActivities" EntityType="DataModel.ProjectActivity" />
+          <EntitySet Name="ProjectTypes" EntityType="DataModel.ProjectType" />
+          <EntitySet Name="UserProfiles" EntityType="DataModel.UserProfile" />
+          <EntitySet Name="UserProjects" EntityType="DataModel.UserProject" />
+          <AssociationSet Name="FK_ProjectActivity_ToTable" Association="DataModel.FK_ProjectActivity_ToTable">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="ProjectActivity" EntitySet="ProjectActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_ToTable_1" Association="DataModel.FK_UserProject_ToTable_1">
+            <End Role="ProjectActivity" EntitySet="ProjectActivities" />
+            <End Role="UserProject" EntitySet="UserProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProject_ToTable" Association="DataModel.FK_UserProject_ToTable">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserProject" EntitySet="UserProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectActivity_ToTable_1" Association="DataModel.FK_ProjectActivity_ToTable_1">
+            <End Role="ProjectType" EntitySet="ProjectTypes" />
+            <End Role="ProjectActivity" EntitySet="ProjectActivities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ProjectActivity">
+          <Key>
+            <PropertyRef Name="ProjectActivityID" />
+          </Key>
+          <Property Name="ProjectActivityID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="OwnerUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="DataModel.FK_ProjectActivity_ToTable" FromRole="ProjectActivity" ToRole="UserProfile" />
+          <NavigationProperty Name="UserProjects" Relationship="DataModel.FK_UserProject_ToTable_1" FromRole="ProjectActivity" ToRole="UserProject" />
+          <Property Type="Int32" Name="ProjectTypeID" Nullable="false" />
+          <NavigationProperty Name="ProjectType" Relationship="DataModel.FK_ProjectActivity_ToTable_1" FromRole="ProjectActivity" ToRole="ProjectType" />
+        </EntityType>
+        <EntityType Name="ProjectType">
+          <Key>
+            <PropertyRef Name="ProjectTypeID" />
+          </Key>
+          <Property Name="ProjectTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ProjectActivity" Relationship="DataModel.FK_ProjectActivity_ToTable_1" FromRole="ProjectType" ToRole="ProjectActivity" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ProjectActivities" Relationship="DataModel.FK_ProjectActivity_ToTable" FromRole="UserProfile" ToRole="ProjectActivity" />
+          <NavigationProperty Name="UserProjects" Relationship="DataModel.FK_UserProject_ToTable" FromRole="UserProfile" ToRole="UserProject" />
+        </EntityType>
+        <EntityType Name="UserProject">
+          <Key>
+            <PropertyRef Name="UserProjectID" />
+          </Key>
+          <Property Name="UserProjectID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectActivityID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TotalHours" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ProjectActivity" Relationship="DataModel.FK_UserProject_ToTable_1" FromRole="UserProject" ToRole="ProjectActivity" />
+          <NavigationProperty Name="UserProfile" Relationship="DataModel.FK_UserProject_ToTable" FromRole="UserProject" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_ProjectActivity_ToTable">
+          <End Role="UserProfile" Type="DataModel.UserProfile" Multiplicity="1" />
+          <End Role="ProjectActivity" Type="DataModel.ProjectActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectActivity">
+              <PropertyRef Name="OwnerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_ToTable_1">
+          <End Role="ProjectActivity" Type="DataModel.ProjectActivity" Multiplicity="1" />
+          <End Role="UserProject" Type="DataModel.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectActivity">
+              <PropertyRef Name="ProjectActivityID" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="ProjectActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProject_ToTable">
+          <End Role="UserProfile" Type="DataModel.UserProfile" Multiplicity="1" />
+          <End Role="UserProject" Type="DataModel.UserProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProject">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectActivity_ToTable_1">
+          <End Type="DataModel.ProjectType" Role="ProjectType" Multiplicity="1" />
+          <End Type="DataModel.ProjectActivity" Role="ProjectActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectType">
+              <PropertyRef Name="ProjectTypeID" />
+            </Principal>
+            <Dependent Role="ProjectActivity">
+              <PropertyRef Name="ProjectTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContext">
+          <EntitySetMapping Name="ProjectActivities">
+            <EntityTypeMapping TypeName="DataModel.ProjectActivity">
+              <MappingFragment StoreEntitySet="ProjectActivity">
+                <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
+                <ScalarProperty Name="ProjectActivityID" ColumnName="ProjectActivityID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OwnerUserID" ColumnName="OwnerUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectTypes">
+            <EntityTypeMapping TypeName="DataModel.ProjectType">
+              <MappingFragment StoreEntitySet="ProjectType">
+                <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="DataModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProjects">
+            <EntityTypeMapping TypeName="DataModel.UserProject">
+              <MappingFragment StoreEntitySet="UserProject">
+                <ScalarProperty Name="UserProjectID" ColumnName="UserProjectID" />
+                <ScalarProperty Name="ProjectActivityID" ColumnName="ProjectActivityID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

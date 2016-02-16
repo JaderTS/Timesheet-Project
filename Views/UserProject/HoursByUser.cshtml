@@ -1,0 +1,31 @@
+﻿@model IEnumerable<TrabalhoFinal.Models.HoursByUser>
+
+@{
+    ViewBag.Title = "HoursByUser";
+}
+
+<h2>Horas por Usuário</h2>
+
+<!--p>
+    @Html.ActionLink("Create New", "Create")
+</!-->
+@using (Html.BeginForm("Index", "HoursByUser", FormMethod.Get))
+{
+    <p>
+        Nome: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@{
+    var grid = new WebGrid(Model, defaultSort: "UserName", canPage: true, canSort: true, rowsPerPage: 5);
+}
+
+@grid.GetHtml(footerStyle: "",
+columns: grid.Columns(
+ grid.Column("Detalhes", header: "", format:
+        @<text>@Html.ActionLink("Detalhes", "DetailedHoursByUser", new { userName = item.UserName })</text>, canSort: false),
+        grid.Column("UserName", header: "Nome"),
+        grid.Column("TotalHour", header: "Total de horas")
+        )
+    )

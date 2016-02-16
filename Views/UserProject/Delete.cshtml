@@ -1,0 +1,46 @@
+﻿@model TrabalhoFinal.UserProject
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>UserProject</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectActivity.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectActivity.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserProfile.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalHours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalHours)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

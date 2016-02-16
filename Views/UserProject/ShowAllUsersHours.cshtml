@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TrabalhoFinal.UserProject>
+
+@{
+    ViewBag.Title = "ShowAllUsersHours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Controle de horas dos Usuários</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectActivityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectActivityID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.UserProjectID })
+        </td>
+    </tr>
+}
+
+</table>

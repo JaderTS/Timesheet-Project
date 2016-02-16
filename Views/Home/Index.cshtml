@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            @if (User.IsInRole("Admin"))
+            {
+                <div>
+                    <h2>Olá!</h2>
+                    <h4>Administre seus projetos e atividades</h4>
+                </div>
+
+            }
+
+            @if (User.IsInRole("Funcionario"))
+            {
+                <div>
+                    <h2>Olá!</h2>
+                    <h4>Coloque neste espaco seu tempo de atividades</h4>
+                </div>
+            }
+        </div>
+    </section>
+}

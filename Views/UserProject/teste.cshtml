@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TrabalhoFinal.Models.ReportByWeek>
+
+@{
+    ViewBag.Title = "teste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>teste</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </th>
+        <th>
+            First day of the week
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalHour)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @TrabalhoFinal.Helpers.FirstDateOfWeek.FirstDate(2013, item.DateNumber.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalHour)
+        </td>
+    </tr>
+}
+
+</table>

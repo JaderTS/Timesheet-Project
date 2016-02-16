@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TrabalhoFinal.UserProfile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Usuários</h2>
+@{
+    var grid = new WebGrid(Model, defaultSort: "UserName", canPage: true, canSort: true, rowsPerPage: 5);
+}
+    @grid.GetHtml(footerStyle: "paginator", columns: grid.Columns(
+    grid.Column("UserId", header: "ID"),
+    grid.Column("UserName", header: "Usuário")
+    )
+)
+

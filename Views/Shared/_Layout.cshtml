@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Trabalho Final S2BA</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Time Tracking", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul class="menu">
+                        @if (Roles.IsUserInRole("Funcionario"))
+                        {
+                            <li>@Html.ActionLink("Cadastrar Horas", "Create", "UserProject")</li><text> ' </text>
+                            <li>@Html.ActionLink("Visualizar Horas", "Index", "UserProject")</li>
+                            
+                        }
+
+                        @if (Roles.IsUserInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Cadastre Usuário", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Cadastre modelo ou atividade", "Create", "ProjectActivity")</li>
+                            <li>@Html.ActionLink("Liste Usuários", "Index", "UserProfile")</li> 
+                            <li>@Html.ActionLink("Listar modelo ou atividade", "Index", "ProjectActivity")</li>
+                        }
+                    </ul>
+                    <br />
+                    <ul class="menu">
+                        @if (Roles.IsUserInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Horas por Usuario", "HoursByUser", "UserProject")</li>
+                            <li>@Html.ActionLink("Detalhadas Mensais", "DetailedHoursByUser", "UserProject")</li>
+                            <li>@Html.ActionLink("Horarios  Usuários", "ShowAllUsersHours", "UserProject")</li>
+                            <li>@Html.ActionLink("Horas por Projeto", "HoursByProject", "UserProject")</li>                           
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

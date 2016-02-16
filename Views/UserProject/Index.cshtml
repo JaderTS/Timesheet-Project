@@ -1,0 +1,24 @@
+﻿@model IEnumerable<TrabalhoFinal.UserProject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Horas Trabalhadas</h2>
+
+@{
+     var grid = new WebGrid(Model,defaultSort:"UserName",canPage:true,canSort:true,rowsPerPage:3);
+}
+
+@grid.GetHtml(footerStyle: "paginator",
+columns: grid.Columns(
+        grid.Column("ProjectActivity.Name", header:"Projeto/Atividade"),
+        grid.Column("TotalHours", header:"Total de Horas"),
+        grid.Column("Date", header:"Data"),
+        grid.Column("Editar",header: "", format:
+        @<text>@Html.ActionLink("Editar", "Edit", new { id=item.UserProjectID })</text>,canSort: false ),
+        grid.Column("Deletar",header: "", format:
+        @<text>@Html.ActionLink("Deletar", "Delete", new { id=item.UserProjectID })</text>,canSort: false )
+        )
+    )

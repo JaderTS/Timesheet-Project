@@ -1,0 +1,43 @@
+﻿@model TrabalhoFinal.UserProject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserProject</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectActivity.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectActivity.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserProfile.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalHours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalHours)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserProjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TrabalhoFinal.Models.DetailedHoursByUser>
+
+@{
+    ViewBag.Title = "DetailedHoursByUser";
+}
+
+<h2>Usuário: @Model.First().UserName</h2>
+
+@{
+    var grid = new WebGrid(Model, defaultSort: "Date", canPage: true, canSort: true, rowsPerPage: 3);
+}
+
+@grid.GetHtml(footerStyle: "paginator",
+columns: grid.Columns(
+        grid.Column("Date", header: "Data"),
+        grid.Column("ProjectName", header: "Projeto/Atividade"),
+        grid.Column("TotalHours", header: "Total de horas")
+        )
+    )
